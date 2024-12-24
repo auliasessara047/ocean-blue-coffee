@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aulia Sessara">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ocean Blue Coffee</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Ocean Blue Coffee</h1>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#order">Order</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="content-wrapper">
+            <section id="main-content">
+                <section id="about">
+                    <h2>About Us</h2>
+                    <p>
+                        Ocean Blue Coffee is a part of our daily life, serving premium high-quality ingredients with 100% Arabica Coffee to all valued customers all over Indonesia.
+                    </p>
+
+                    <article class="arabica">
+                        <h3>Arabica Coffee</h3>
+                        <p>
+                            Kopi Arabika terasa manis dan ringan, beberapa jenis arabika bisa memiliki aftertaste yang manis atau bahkan bercita rasa buah. Aromanya lebih lembut dengan sedikit masam.
+                        </p>
+                    </article>
+                </section>
+            </header>
+
+            <footer>
+                <section id="order">
+                    <h2>Order here</h2>
+                    <div class="items-container">
+                        <div class="item">
+                            <img class="img" src="../assets/brown sugar.jpeg" alt="Brown Sugar Milk Coffee">
+                            <div class="item-info">
+                                <label for="item1">Brown Sugar Milk Coffee</label>
+                                <p>(Rp. 15,000)</p>
+                                <input type="number" id="item1" value="0" min="0" max="10" onchange="updateTotal()">
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <img class="img" src="../assets/americano.jpeg" alt="Americano Coffee">
+                            <div class="item-info">
+                                <label for="item2">Americano Coffee</label>
+                                <p>(Rp. 10,000)</p>
+                                <input type="number" id="item2" value="0" min="0" max="10" onchange="updateTotal()">
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <img class="img" src="../assets/cappucino.jpeg" alt="Cappuccino Coffee">
+                            <div class="item-info">
+                                <label for="item3">Cappuccino Coffee</label>
+                                <p>(Rp. 15,000)</p>
+                                <input type="number" id="item3" value="0" min="0" max="10" onchange="updateTotal()">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Total price display -->
+                <div class="total">
+                    Total Price: Rp. <span id="totalPrice">0</span>
+                </div>
+
+                <!-- Checkout button -->
+                <div class="checkout">
+                    <button id="checkoutButton" onclick="checkout()" disabled>Checkout</button>
+                </div>
+
+                <section id="contact">
+                    <h2>Contact Us</h2>
+                    <p>
+                        <a href="https://www.instagram.com/lalialisa21/profilecard/?igsh=bDRuZGZjMWcycHdx" target="_blank">Instagram</a>
+                    </p>
+                </section>
+            </section>
+
+            <aside id="sidebar">
+                <h3>Special Offers</h3>
+                <p>Cek penawaran ekslusif gratis coffee bag!</p>
+                <div class="advertisement">
+                    <h4>Special Coffee Bag of the Month</h4>
+                    <img src="../assets/cofee bag.jpeg" alt="Special Coffee">
+                    <p> Cobalah coffee bag limited kita, gratis 1 pilihan coffee bag dengan minimal pembelian Rp. 100.000 </p>
+                </div>
+            </aside>
+        </div>
+    </main>
+    </footer>
+
+    <script>
+        // Price of each item in whole numbers
+        const itemPrices = {
+            item1: 15000,
+            item2: 10000,
+            item3: 15000
+        };
+
+        // Update the total price when quantities change
+        function updateTotal() {
+            const item1Quantity = parseInt(document.getElementById('item1').value) || 0;
+            const item2Quantity = parseInt(document.getElementById('item2').value) || 0;
+            const item3Quantity = parseInt(document.getElementById('item3').value) || 0;
+
+            // Calculate total price
+            const total = (itemPrices.item1 * item1Quantity) +
+                          (itemPrices.item2 * item2Quantity) +
+                          (itemPrices.item3 * item3Quantity);
+
+            // Update total price display
+            document.getElementById('totalPrice').textContent = total.toLocaleString();
+
+            // Enable/Disable checkout button based on total price
+            document.getElementById('checkoutButton').disabled = total <= 0;
+        }
+
+        // Function to simulate the checkout process
+        function checkout() {
+            const total = parseInt(document.getElementById('totalPrice').textContent.replace(/,/g, ''));
+            if (total > 0) {
+                alert(`Booking Successful! Total Price: Rp.${total.toLocaleString()}`);
+            } else {
+                alert('Please select items to book.');
+            }
+        }
+    </script>
+</body>
+</html>
